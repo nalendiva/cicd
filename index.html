@@ -45,7 +45,11 @@
         <button onclick="ubahTeks()">Klik Saya</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function ubahTeks() {
+            document.getElementById("description").innerText = "Teks telah diubah setelah tombol diklik!";
+        }
+    </script>
 </body>
 
 </html>
