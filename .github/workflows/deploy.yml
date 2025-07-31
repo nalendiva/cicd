@@ -20,9 +20,9 @@ jobs:
 
       - name: Deploy to ECS
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@3.27.193.11 << 'EOF'
-            cd /var/www/html/Cloud-CICD
-            sudo git pull origin main
+          ssh -o StrictHostKeyChecking=no ubuntu@3.106.193.166 << 'EOF'
+            cd /var/www/html/frontend
+            sudo git pull cicd main
             # Restart Nginx or any other service if needed
             sudo systemctl restart nginx
           EOF
