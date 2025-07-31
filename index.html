@@ -1,55 +1,44 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Sederhana</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 50px;
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Data Pengguna</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    table { border-collapse: collapse; width: 50%; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
+    th { background-color: #f2f2f2; }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Selamat Datang hgghghdi Web Sederhana! Done Beres CICD</h1>
-        <p id="description">Ini adalah contoh halaman web statis menggunakan HTML, CSS, dan JavaScript.</p>
-        <button onclick="ubahTeks()">Klik Saya</button>
-    </div>
+  <h1>Daftar Pengguna</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama</th>
+        <th>Umur</th>
+      </tr>
+    </thead>
+    <tbody id="user-table-body">
+    </tbody>
+  </table>
 
-    <script>
-        function ubahTeks() {
-            document.getElementById("description").innerText = "Teks telah diubah setelah tombol diklik!";
-        }
-    </script>
+  <script>
+    // Ganti IP_BACKEND_EC2 dengan IP publik EC2 backend kamu
+    fetch('http://192.168.141.58:5000/data')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('user-table-body');
+        data.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${user.id}</td><td>${user.name}</td><td>${user.age}</td>`;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  </script>
 </body>
-
 </html>
